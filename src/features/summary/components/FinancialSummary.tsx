@@ -1,5 +1,4 @@
 import { ArrowUpRight, TrendingUp } from "lucide-react";
-import SectionCard from "@/shared/components/cards/SectionCard";
 import { brl, pct } from "@/shared/utils/format";
 import { usePortfolioMetrics } from "@/features/portfolio/hooks/usePortfolioMetrics";
 
@@ -64,5 +63,3 @@ const FinancialSummary = () => {
 };
 
 export default FinancialSummary;
-
-export { SectionCard };

@@ -1,0 +1,19 @@
+import type { Asset, CategoryTargets } from "../types/portfolio-types";
+
+export const initialAssets: Asset[] = [
+  { id: "1", ticker: "BBAS3", price: 19.42, quantity: 14, averagePrice: 19.47, idealQuantity: 23, category: "Ações", note: 9 },
+  { id: "2", ticker: "ABCB4", price: 24.24, quantity: 11, averagePrice: 19.47, idealQuantity: 13, category: "Ações", note: 7 },
+  { id: "3", ticker: "HGLG11", price: 158.20, quantity: 1, averagePrice: 152.00, idealQuantity: 2, category: "FIIs", note: 8 },
+  { id: "4", ticker: "MXRF11", price: 10.45, quantity: 10, averagePrice: 10.10, idealQuantity: 16, category: "FIIs", note: 7 },
+  { id: "5", ticker: "KNRI11", price: 142.40, quantity: 1, averagePrice: 140.00, idealQuantity: 2, category: "FIIs", note: 8 },
+  { id: "6", ticker: "XPLG11", price: 15.05, quantity: 1, averagePrice: 14.80, idealQuantity: 4, category: "FIIs", note: 6 },
+];
+
+export const initialTargets: CategoryTargets = {
+  "Ações": 0.57,
+  "FIIs": 0.43,
+  "ETFs": 0,
+  "Cripto": 0,
+  "REITS": 0,
+  "BDRs": 0,
+};

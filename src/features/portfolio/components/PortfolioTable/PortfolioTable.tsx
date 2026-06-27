@@ -2,19 +2,23 @@ import { useCallback } from "react";
 import { useWallet } from "../../context/WalletContext";
 import { usePortfolioMetrics } from "../../hooks/usePortfolioMetrics";
 import PortfolioDrawer from "../PortfolioDrawer";
+import { portfolioTableStyles } from "./styles";
 
-const PortfolioTable = () => {
+type PortfolioTableProps = {
+  density?: "compact" | "normal" | "spacious";
+};
+
+const PortfolioTable = ({ density }: PortfolioTableProps) => {
   const { expandedCategory, setExpandedCategory } = useWallet();
   const { groups, total } = usePortfolioMetrics();
 
   const toggle = useCallback(
-    (category: string) =>
-      setExpandedCategory(expandedCategory === category ? null : category),
+    (category: string) => setExpandedCategory(expandedCategory === category ? null : category),
     [expandedCategory, setExpandedCategory],
   );
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className={portfolioTableStyles({ density })}>
       {groups.map((g) => (
         <PortfolioDrawer
           key={g.category}

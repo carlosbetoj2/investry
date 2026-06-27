@@ -1,0 +1,12 @@
+.input-color-black {
+  color: #2e3746;
+}
+.input-color-black:hover {
+  color: #1a1f27;
+}
+.input-color-slate {
+  color: #596577;
+}
+.input-color-slate:hover {
+  color: #2e3746;
+}

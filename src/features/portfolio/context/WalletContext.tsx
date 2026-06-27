@@ -1,16 +1,5 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
-import type {
-  Asset,
-  CategoryTargets,
-  WalletType,
-} from "../types/portfolio-types";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import type { Asset, CategoryTargets, WalletType } from "../types/portfolio-types";
 import { initialAssets, initialTargets } from "../data/initial-assets";
 
 interface WalletContextValue {
@@ -33,22 +22,15 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [assets, setAssets] = useState<Asset[]>(initialAssets);
   const [targets, setTargets] = useState<CategoryTargets>(initialTargets);
   const [availableBalance, setAvailableBalance] = useState<number>(234.1);
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(
-    "Ações",
-  );
+  const [expandedCategory, setExpandedCategory] = useState<string | null>("Ações");
 
   const updateAsset = useCallback((id: string, patch: Partial<Asset>) => {
-    setAssets((prev) =>
-      prev.map((a) => (a.id === id ? { ...a, ...patch } : a)),
-    );
+    setAssets((prev) => prev.map((a) => (a.id === id ? { ...a, ...patch } : a)));
   }, []);
 
-  const updateTarget = useCallback(
-    (category: keyof CategoryTargets, percent: number) => {
-      setTargets((prev) => ({ ...prev, [category]: percent }));
-    },
-    [],
-  );
+  const updateTarget = useCallback((category: keyof CategoryTargets, percent: number) => {
+    setTargets((prev) => ({ ...prev, [category]: percent }));
+  }, []);
 
   const value = useMemo<WalletContextValue>(
     () => ({
@@ -63,20 +45,10 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
       updateAsset,
       updateTarget,
     }),
-    [
-      wallet,
-      assets,
-      targets,
-      availableBalance,
-      expandedCategory,
-      updateAsset,
-      updateTarget,
-    ],
+    [wallet, assets, targets, availableBalance, expandedCategory, updateAsset, updateTarget],
   );
 
-  return (
-    <WalletContext.Provider value={value}>{children}</WalletContext.Provider>
-  );
+  return <WalletContext.Provider value={value}>{children}</WalletContext.Provider>;
 };
 
 export const useWallet = () => {

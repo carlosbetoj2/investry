@@ -1,12 +1,16 @@
 import { memo, useState } from "react";
+import { noteCellButton, noteCellInput } from "./styles";
 
 interface NoteCellProps {
   note: number;
   onChange: (n: number) => void;
 }
 
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
 const NoteCell = ({ note, onChange }: NoteCellProps) => {
   const [editing, setEditing] = useState(false);
+
   if (editing) {
     return (
       <input
@@ -15,20 +19,18 @@ const NoteCell = ({ note, onChange }: NoteCellProps) => {
         max={10}
         autoFocus
         defaultValue={note}
+        className={noteCellInput()}
         onBlur={(e) => {
-          const v = Math.min(10, Math.max(0, Number(e.target.value)));
+          const v = clamp(Number(e.target.value), 0, 10);
           onChange(v);
           setEditing(false);
         }}
-        className="h-9 w-12 rounded-lg bg-foreground text-center text-sm font-bold text-background outline-none"
       />
     );
   }
+
   return (
-    <button
-      onClick={() => setEditing(true)}
-      className="flex h-9 w-12 items-center justify-center rounded-lg bg-foreground text-sm font-bold text-background hover:bg-foreground/90"
-    >
+    <button onClick={() => setEditing(true)} className={noteCellButton()}>
       {note.toString().padStart(2, "0")}
     </button>
   );

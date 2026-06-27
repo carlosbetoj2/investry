@@ -1,0 +1,33 @@
+.pill-red {
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #fcd8d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  height: auto;
+  width: 72px;
+}
+.pill-green {
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #d9fcd8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  height: auto;
+  width: 72px;
+}
+.pill-gray {
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #eef1f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  height: auto;
+  width: 72px;
+}

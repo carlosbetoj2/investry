@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { tabButtonStyles, activeIndicatorStyles } from "./styles";
 
 interface TabNavigationProps {
   tabs: string[];
@@ -10,22 +11,17 @@ const TabNavigation = ({ tabs, activeTab, onTabChange }: TabNavigationProps) => 
   return (
     <nav className="flex items-center justify-around border-b border-border">
       {tabs.map((tab) => {
-        const active = activeTab === tab;
+        const isActive = activeTab === tab;
+
         return (
           <button
             key={tab}
             onClick={() => onTabChange(tab)}
-            className={cn(
-              "relative px-6 py-4 text-sm font-semibold transition-colors",
-              active
-                ? "text-foreground"
-                : "text-muted-foreground hover:text-foreground",
-            )}
+            className={cn(tabButtonStyles({ active: isActive }))}
           >
             {tab}
-            {active && (
-              <span className="absolute inset-x-0 -bottom-px h-0.5 bg-foreground rounded-full" />
-            )}
+
+            {isActive && <span className={activeIndicatorStyles()} />}
           </button>
         );
       })}

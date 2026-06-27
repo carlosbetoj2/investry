@@ -1,7 +1,9 @@
 import { memo } from "react";
 import { ArrowUp, ArrowDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import EditableField from "../../EditableField";
+import { cn } from "@/lib/utils";
+
+import { quantityContainer, quantityDelta, quantityIcon } from "./styles";
 
 interface QuantityCellProps {
   quantity: number;
@@ -10,9 +12,10 @@ interface QuantityCellProps {
 }
 
 const QuantityCell = ({ quantity, delta, onChange }: QuantityCellProps) => {
-  const positive = delta >= 0;
+  const trend = delta > 0 ? "up" : delta < 0 ? "down" : "neutral";
+
   return (
-    <div className="flex items-center gap-2">
+    <div className={quantityContainer()}>
       <EditableField
         value={quantity}
         onCommit={onChange}
@@ -20,17 +23,13 @@ const QuantityCell = ({ quantity, delta, onChange }: QuantityCellProps) => {
         showPencil={false}
         format={(v) => v.toString()}
       />
+
       {delta !== 0 && (
-        <span
-          className={cn(
-            "inline-flex items-center text-xs font-semibold",
-            positive ? "text-success" : "text-destructive",
-          )}
-        >
-          {positive ? (
-            <ArrowUp className="h-3 w-3" />
+        <span className={quantityDelta({ trend })}>
+          {delta > 0 ? (
+            <ArrowUp className={quantityIcon()} />
           ) : (
-            <ArrowDown className="h-3 w-3" />
+            <ArrowDown className={quantityIcon()} />
           )}
           {Math.abs(delta)}
         </span>

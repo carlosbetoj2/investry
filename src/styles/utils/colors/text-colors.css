@@ -1,0 +1,34 @@
+.text-muted-foreground-40 {
+  color: hsla(240, 5%, 64%, 0.4);
+}
+
+.text-color-black {
+  color: #2e3746;
+}
+.text-color-black-disabled {
+  color: rgba(46, 55, 70, 0.4);
+}
+.text-color-black-opacity {
+  color: rgba(46, 55, 70, 0.7);
+}
+.text-color-black-opacity:hover {
+  color: #2e3746;
+  background-color: #f6f7f8;
+}
+
+.text-color-slate {
+  color: #596577;
+}
+.text-color-slate-opacity {
+  color: rgba(89, 101, 119, 0.8);
+}
+.text-color-gray {
+  color: #6b7280;
+}
+
+.success-text {
+  color: #139242;
+}
+.error-text {
+  color: #cf4536;
+}

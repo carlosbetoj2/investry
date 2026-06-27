@@ -6,9 +6,15 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Investry — Dashboard de Investimentos" },
-      { name: "description", content: "Dashboard financeiro modular para gestão de carteira de investimentos." },
+      {
+        name: "description",
+        content: "Dashboard financeiro modular para gestão de carteira de investimentos.",
+      },
       { property: "og:title", content: "Investry" },
-      { property: "og:description", content: "Gestão de carteira, alocação por categoria e rebalanceamento automático." },
+      {
+        property: "og:description",
+        content: "Gestão de carteira, alocação por categoria e rebalanceamento automático.",
+      },
     ],
   }),
   component: Index,

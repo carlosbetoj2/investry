@@ -1,0 +1,18 @@
+/* Importando componentes */
+@import './components/buttons.css';
+@import './components/inputs.css';
+
+/* Importando layouts */
+@import './layout/panel.css';
+@import './layout/screen-effects.css';
+@import './layout/structure/after-structure.css';
+@import './layout/structure/edges.css';
+@import './layout/table.css';
+@import './layout/zindex.css';
+
+/* Importando utilitários */
+@import './utils/colors/backgrond-colors.css';
+@import './utils/colors/pill-colors.css';
+@import './utils/colors/text-colors.css';
+@import './utils/transformation.css';
+@import './utils/typography.css';

@@ -28,10 +28,7 @@ export class PriceUpdateClient {
 
   async updatePrices(payload: PriceUpdatePayload): Promise<PriceUpdateResult> {
     const controller = new AbortController();
-    const timeoutId = setTimeout(
-      () => controller.abort(),
-      this.config.timeout,
-    );
+    const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
     try {
       const response = await fetch(this.config.webhookUrl, {
         method: "POST",
@@ -60,9 +57,7 @@ export class PriceUpdateClient {
 }
 
 let clientInstance: PriceUpdateClient | null = null;
-export function getPriceUpdateClient(
-  config?: Partial<PriceUpdateClientConfig>,
-): PriceUpdateClient {
+export function getPriceUpdateClient(config?: Partial<PriceUpdateClientConfig>): PriceUpdateClient {
   if (!clientInstance || config) clientInstance = new PriceUpdateClient(config);
   return clientInstance;
 }

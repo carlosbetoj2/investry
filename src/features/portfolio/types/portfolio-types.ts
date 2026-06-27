@@ -1,10 +1,4 @@
-export type AssetCategory =
-  | "Ações"
-  | "FIIs"
-  | "ETFs"
-  | "Cripto"
-  | "REITS"
-  | "BDRs";
+export type AssetCategory = "Ações" | "FIIs" | "ETFs" | "Cripto" | "REITS" | "BDRs";
 
 export interface Asset {
   id: string;
@@ -18,12 +12,12 @@ export interface Asset {
 }
 
 export interface CategoryTargets {
-  "Ações": number;
-  "FIIs": number;
-  "ETFs": number;
-  "Cripto": number;
-  "REITS": number;
-  "BDRs": number;
+  Ações: number;
+  FIIs: number;
+  ETFs: number;
+  Cripto: number;
+  REITS: number;
+  BDRs: number;
 }
 
 export interface CategoryGroup {

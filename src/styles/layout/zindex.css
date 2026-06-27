@@ -1,0 +1,7 @@
+.z-index-up {
+  z-index: 50;
+}
+
+.z-index-down {
+  z-index: -50;
+}

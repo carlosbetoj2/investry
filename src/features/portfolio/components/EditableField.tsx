@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { editableFieldButton, editableFieldInput } from "./styles";
 
 interface EditableFieldProps {
   value: number;
@@ -50,10 +51,7 @@ const EditableField = ({
           if (e.key === "Enter") commit();
           if (e.key === "Escape") setEditing(false);
         }}
-        className={cn(
-          "w-24 rounded-md border border-ring bg-card px-2 py-1 text-sm font-medium text-foreground outline-none",
-          className,
-        )}
+        className={cn(editableFieldInput(), className)}
       />
     );
   }
@@ -62,15 +60,11 @@ const EditableField = ({
     <button
       type="button"
       onClick={() => setEditing(true)}
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium text-foreground transition-colors hover:bg-secondary",
-        className,
-      )}
+      className={cn(editableFieldButton({ showPencil }), className)}
     >
       <span>{format ? format(value) : value}</span>
-      {showPencil && (
-        <Pencil className="h-3 w-3 text-muted-foreground opacity-60" />
-      )}
+
+      {showPencil && <Pencil className="h-3 w-3 text-muted-foreground opacity-60" />}
     </button>
   );
 };

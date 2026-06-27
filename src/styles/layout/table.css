@@ -1,0 +1,25 @@
+.column-bold {
+  font-weight: 700;
+  color: #3e4a5d;
+}
+.column-default {
+  font-weight: 600;
+  color: #4b525c;
+}
+.column-default-opacity {
+  font-weight: 600;
+  color: rgba(75, 82, 92, 0.8);
+}
+
+.column-box {
+  cursor: pointer;
+  background-color: black;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 40px;
+}

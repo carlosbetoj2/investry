@@ -1,29 +1,26 @@
 import { cn } from "@/lib/utils";
-import type { LucideIcon } from "lucide-react";
 import { TrendingUp } from "lucide-react";
+
+import { badge, textElement, layout, iconStyle } from "@/styles";
 
 export type MetricTone = "info" | "success" | "warning" | "violet";
 
 interface HeaderMetricProps {
-  icon: LucideIcon;
+  icon: React.ReactNode;
   label: string;
   value: string;
   tone: MetricTone;
   hint?: string;
-  delta?: { value: string; positive: boolean };
+  delta?: {
+    value: string;
+    positive: boolean;
+  };
   onClick?: () => void;
   editable?: boolean;
 }
 
-const toneMap: Record<MetricTone, string> = {
-  info: "bg-info text-white",
-  success: "bg-success text-white",
-  warning: "bg-success text-white",
-  violet: "bg-violet text-white",
-};
-
 const HeaderMetric = ({
-  icon: Icon,
+  icon,
   label,
   value,
   tone,
@@ -32,45 +29,69 @@ const HeaderMetric = ({
   onClick,
   editable,
 }: HeaderMetricProps) => {
+  const clickable = Boolean(onClick);
+
   return (
     <button
       type="button"
       onClick={onClick}
-      className={cn(
-        "group flex items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors",
-        onClick && "hover:bg-white/5",
-      )}
+      className={cn(layout({ align: "center", direction: "row" }))}
     >
-      <div
-        className={cn(
-          "flex h-12 w-12 items-center justify-center rounded-xl shadow-sm",
-          toneMap[tone],
-        )}
-      >
-        <Icon className="h-6 w-6" />
+      <div className={cn(badge({ shadow: "sm", boxSize: "sm", tone: tone }), "mr-4")}>
+        <div className={cn(iconStyle({ iconSize: "lg" }))}>{icon}</div>
       </div>
-      <div className="min-w-0">
-        <div className="text-[10px] font-semibold uppercase tracking-wider text-header-muted">
-          {label}
+
+      <div className="my-[6px]">
+        <div className={cn(layout({ align: "start" }))}>
+          <div
+            className={cn(
+              "uppercase",
+              textElement({
+                textSize: "md",
+                fontWeight: "medium",
+                spacing: "large",
+                textColor: "slate",
+              }),
+            )}
+          >
+            {label}
+          </div>
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold text-header-foreground">
+
+        <div className={cn(layout({ gap: "sm" }), "items-baseline")}>
+          <span
+            className={cn(textElement({ textSize: "xl", fontWeight: "bold", textColor: "dark" }))}
+          >
             {value}
           </span>
+
           {delta && (
-            <span
+            <div
               className={cn(
-                "flex items-center gap-0.5 text-xs font-semibold",
+                layout({ align: "center", gap: "xs" }),
                 delta.positive ? "text-success" : "text-destructive",
               )}
             >
-              {delta.value}
+              <span
+                className={textElement({
+                  textSize: "xs",
+                  fontWeight: "semibold",
+                })}
+              >
+                {delta.value}
+              </span>
+
               <TrendingUp className="h-3 w-3" />
-            </span>
+            </div>
           )}
         </div>
+
         {hint && (
-          <div className="text-[10px] text-header-muted">
+          <div
+            className={cn(
+              textElement({ textSize: "md", fontWeight: "medium", textColor: "slate" }),
+            )}
+          >
             {editable ? "Clique para editar" : hint}
           </div>
         )}

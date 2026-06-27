@@ -1,0 +1,10 @@
+.bg-color-black-opacity-50 {
+  background-color: rgba(241, 245, 249, 0.5);
+}
+
+.bg-color-gray {
+  background-color: #f5f5f5;
+}
+.bg-color-gray-opacity {
+  background-color: rgba(120, 120, 120, 0.3);
+}

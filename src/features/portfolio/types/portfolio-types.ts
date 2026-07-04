@@ -2,6 +2,7 @@ export type AssetCategory = "Ações" | "FIIs" | "ETFs" | "Cripto" | "REITS" | "
 
 export interface Asset {
   id: string;
+  icon: string;
   ticker: string;
   price: number;
   quantity: number;

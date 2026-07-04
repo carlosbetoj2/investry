@@ -3,6 +3,7 @@ import type { Asset, CategoryTargets } from "../types/portfolio-types";
 export const initialAssets: Asset[] = [
   {
     id: "1",
+    icon: "https://investidor10.com.br/storage/companies/66ad149f52cd4.jpg",
     ticker: "BBAS3",
     price: 19.42,
     quantity: 14,
@@ -13,6 +14,7 @@ export const initialAssets: Asset[] = [
   },
   {
     id: "2",
+    icon: "https://investidor10.com.br/storage/companies/6781530224ba5.png",
     ticker: "ABCB4",
     price: 24.24,
     quantity: 11,
@@ -23,6 +25,7 @@ export const initialAssets: Asset[] = [
   },
   {
     id: "3",
+    icon: "https://investidor10.com.br/assets/front/icons/building.svg",
     ticker: "HGLG11",
     price: 158.2,
     quantity: 1,
@@ -34,6 +37,7 @@ export const initialAssets: Asset[] = [
   {
     id: "4",
     ticker: "MXRF11",
+    icon: "https://investidor10.com.br/assets/front/icons/building.svg",
     price: 10.45,
     quantity: 10,
     averagePrice: 10.1,
@@ -44,6 +48,7 @@ export const initialAssets: Asset[] = [
   {
     id: "5",
     ticker: "KNRI11",
+    icon: "https://investidor10.com.br/assets/front/icons/building.svg",
     price: 142.4,
     quantity: 1,
     averagePrice: 140.0,
@@ -54,6 +59,7 @@ export const initialAssets: Asset[] = [
   {
     id: "6",
     ticker: "XPLG11",
+    icon: "https://investidor10.com.br/assets/front/icons/building.svg",
     price: 15.05,
     quantity: 1,
     averagePrice: 14.8,

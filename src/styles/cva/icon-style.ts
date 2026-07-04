@@ -1,5 +1,5 @@
 import { tv } from "tailwind-variants";
-import { iconSize } from "../primitives";
+import { iconColor, iconSize } from "../primitives";
 import { animation } from "../patterns";
 
 export const iconStyle = tv({
@@ -7,6 +7,7 @@ export const iconStyle = tv({
 
   variants: {
     animation,
+    iconColor,
     iconSize,
   },
 });

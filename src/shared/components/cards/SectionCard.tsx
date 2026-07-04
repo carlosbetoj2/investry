@@ -7,6 +7,7 @@ import {
   sectionCardTitleStyles,
   sectionCardBodyStyles,
 } from "./styles";
+import { appearance, layout, textElement } from "@/styles";
 
 interface SectionCardProps {
   title?: string;
@@ -26,17 +27,40 @@ const SectionCard = ({
   children,
 }: SectionCardProps) => {
   return (
-    <section className={cn(sectionCardStyles(), className)}>
+    <section className={cn(appearance({ rounded: "large", border: "full", shadow: "large" }))}>
       {(title || action) && (
-        <header className={cn(sectionCardHeaderStyles())}>
-          {title && <h3 className={cn(sectionCardTitleStyles())}>{title}</h3>}
-          {action}
+        <header
+          className={cn(
+            layout({
+              align: "around",
+              alignY: "center",
+              direction: "responsiveRow",
+              display: "grid",
+            }),
+            appearance({ border: "lower" }),
+            "px-2 py-5",
+          )}
+        >
+          {/* {title && (
+            <h3
+              className={cn(
+                textElement({
+                  textSize: "lg",
+                  fontWeight: "bold",
+                  spacing: "large",
+                  textColor: "dark",
+                }),
+                "uppercase",
+              )}
+            >
+              {title}
+            </h3>
+          )} */}
+          <div>{action}</div>
         </header>
       )}
 
-      <div className={cn(sectionCardBodyStyles({ padding: bodyPadding }), bodyClassName)}>
-        {children}
-      </div>
+      <div className="p-3">{children}</div>
     </section>
   );
 };

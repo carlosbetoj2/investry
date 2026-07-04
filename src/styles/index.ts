@@ -5,4 +5,5 @@ export * from "./cva/layout";
 export * from "./cva/icon-style";
 export * from "./cva/appearance";
 export * from "./cva/drawer";
-export * from "./cva/z-index";
+export * from "./cva/input";
+export * from "./cva/navigationTab";

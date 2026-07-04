@@ -3,24 +3,23 @@ import TabNavigation from "@/shared/components/navigation/TabNavigation";
 import DashboardHeader from "../components/DashboardHeader";
 import FinancialSummary from "@/features/summary/components/FinancialSummary";
 import NegotiationsSection from "@/features/summary/components/NegotiationsSection";
+import { cn } from "@/lib/utils";
 
-import {
-  dashboardVariants,
-  dashboardContainerVariants,
-  dashboardCardVariants,
-  dashboardContentVariants,
-  placeholderVariants,
-  placeholderTitleVariants,
-  placeholderTextVariants,
-} from "./styles";
+import { appearance, layout, textElement } from "@/styles";
 
 const tabs = ["Resumo", "Proventos", "Patrimônio", "Lançamentos", "IRPF"];
 
 const Placeholder = ({ title }: { title: string }) => {
   return (
-    <div className={placeholderVariants()}>
-      <h3 className={placeholderTitleVariants()}>{title}</h3>
-      <p className={placeholderTextVariants()}>Funcionalidade em desenvolvimento</p>
+    <div className={cn(layout({ align: "center", direction: "col", gap: "sm" }), "h-60")}>
+      <h3
+        className={cn(textElement({ textSize: "lg", fontWeight: "semibold", textColor: "dark" }))}
+      >
+        {title}
+      </h3>
+      <p className={cn(textElement({ textSize: "sm", textColor: "slate" }))}>
+        Funcionalidade em desenvolvimento
+      </p>
     </div>
   );
 };
@@ -29,14 +28,18 @@ const DashboardPage = () => {
   const [active, setActive] = useState("Resumo");
 
   return (
-    <div className={dashboardVariants()}>
+    <div>
       <DashboardHeader />
 
-      <main className={dashboardContainerVariants()}>
-        <div className={dashboardCardVariants()}>
+      <main className="mx-auto max-w-[100%] md:w-[73%] px-3 py-6">
+        <div
+          className={cn(
+            appearance({ rounded: "large", border: "full", shadow: "large", bg: "white" }),
+          )}
+        >
           <TabNavigation tabs={tabs} activeTab={active} onTabChange={setActive} />
 
-          <div className={dashboardContentVariants()}>
+          <div className="space-y-6 p-3 md:p-6">
             {active === "Resumo" && (
               <>
                 <FinancialSummary />

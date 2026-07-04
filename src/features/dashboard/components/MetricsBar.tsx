@@ -21,11 +21,11 @@ const MetricsBar = () => {
   return (
     <div
       className={cn(
-        layout({ align: "between", direction: "responsive" }),
-        "py-[2px] max-w-[84%] md:max-w-[91%] lg:max-w-[64%] mx-auto",
+        layout({ align: "between", direction: "row" }),
+        "mx-auto py-[6px] max-w-[100%]",
       )}
     >
-      <div className={layout()}>
+      <div>
         <HeaderMetric
           icon={<img src={dollar} alt="dólar" />}
           label="Patrimônio Total"

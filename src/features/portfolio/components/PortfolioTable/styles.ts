@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const portfolioRowStyles = cva(
-  "grid grid-cols-12 items-center gap-2 border-b border-border/50 px-6 py-3 text-sm ",
+  "grid grid-cols-[1.75fr_1fr_repeat(9,minmax(0,1fr))] items-center gap-2 border-b border-border/50 px-6 py-3 text-sm ",
   {
     variants: {
       hover: {

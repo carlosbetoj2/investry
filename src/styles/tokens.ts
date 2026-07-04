@@ -3,38 +3,36 @@ export const fontWeight = {
   medium: "font-medium",
   semibold: "font-semibold",
   bold: "font-bold",
+  extrabold: "font-extrabold",
 };
 
 export const textSize = {
-  xs: "text-xs",
-  sm: "text-[13px]",
-  md: "text-sm",
-  lg: "text-lg ",
+  xs: "text-[13px]",
+  sm: "text-sm ",
+  md: "text-[15px]",
+  lg: "text-lg",
   xl: "text-xl",
   xxl: "text-2xl",
 };
 
 export const textColor = {
   white: "text-white",
-  dark: "text-[#2e3746]",
-  black: "text-[#4b525c]",
-  slate: "text-[#596577]",
+  dark: "text-slate-800",
+  black: "text-gray-600",
+  slate: "text-slate-500",
 };
 
 export const gap = {
   xs: "gap-1",
   sm: "gap-2",
-  md: "gap-8",
-  lg: "gap-14",
-  xl: "gap-38",
+  md: "gap-4",
+  lg: "gap-8",
+  xl: "gap-38 bg-red-100",
 };
 
 export const shadow = {
-  xs: "",
-  sm: "",
-  md: "shadow-sm",
-  lg: "",
-  xl: "",
+  small: "shadow-xs",
+  large: "shadow-sm",
 };
 
 export const spacing = {

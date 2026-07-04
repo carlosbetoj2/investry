@@ -1,21 +1,43 @@
 import { memo } from "react";
 import { Bookmark } from "lucide-react";
-import type { AssetCategory } from "../../../types/portfolio-types";
-import { tickerBadge, tickerContainer, tickerText, tickerBookmark } from "./styles";
+import { button, iconStyle, layout, textElement } from "@/styles";
+import { cn } from "@/lib/cn";
 
 interface TickerCellProps {
   ticker: string;
-  category: AssetCategory;
+  icon: string;
 }
 
-const TickerCell = ({ ticker, category }: TickerCellProps) => {
+const TickerCell = ({ ticker, icon }: TickerCellProps) => {
   return (
-    <div className={tickerContainer()}>
-      <div className={tickerBadge({ category })}>{ticker.slice(0, 4)}</div>
+    <div className={cn(layout({ alignX: "start", alignY: "center", gap: "sm" }))}>
+      <div className={cn(layout({ alignX: "center", alignY: "center" }))}>
+        <img className={cn(button({ iconSize: "xl" }))} src={icon} alt="ícone ativo" />
+      </div>
 
-      <span className={tickerText()}>{ticker}</span>
+      <span
+        className={cn(
+          textElement({
+            fontWeight: "extrabold",
+            textColor: "black",
+            spacing: "medium",
+            textSize: "sm",
+          }),
+        )}
+      >
+        {ticker}
+      </span>
 
-      <Bookmark className={tickerBookmark()} />
+      <div className={cn(layout({ align: "center" }), "w-[39%]")}>
+        <button className={cn(button({ buttonType: "secondaryGhost" }))}>
+          <Bookmark
+            className={cn(
+              iconStyle({ iconColor: "primaryColor", animation: "zoom" }),
+              "hover:text-red-400",
+            )}
+          />
+        </button>
+      </div>
     </div>
   );
 };

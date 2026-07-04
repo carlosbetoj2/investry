@@ -10,21 +10,23 @@ import {
   metricPositiveStyles,
   mutedTextStyles,
 } from "./styles";
+import { appearance, badge, iconStyle, layout } from "@/styles";
+import { cn } from "@/lib/cn";
 
 const Card = ({
   title,
   icon,
   children,
-  tone = "default",
+  tone,
 }: {
   title: string;
   icon: React.ReactNode;
   children: React.ReactNode;
-  tone?: "info" | "success" | "default";
+  tone?: "info" | "success";
 }) => (
-  <div className={cardStyles()}>
-    <div className={cardHeaderStyles()}>
-      <h4 className={titleStyles({ tone })}>{title}</h4>
+  <div className={cn(appearance({ rounded: "large", border: "full", shadow: "large" }), "p-4")}>
+    <div className={cn(layout({ align: "between" }))}>
+      <h4 className={cn(badge({ textTone: tone }))}>{title}</h4>
       {icon}
     </div>
     {children}
@@ -35,13 +37,12 @@ const FinancialSummary = () => {
   const { total, expected, profit, profitPercent, proventos } = usePortfolioMetrics();
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className={cn(badge({ textTone: "info" }), layout({ gap: "md" }), "grid md:grid-cols-2")}>
       <Card
         title="Valor Aplicado / Esperado"
-        icon={<ArrowUpRight className="h-5 w-5 text-info" />}
-        tone="info"
+        icon={<ArrowUpRight className={cn(iconStyle({ iconSize: "md" }))} />}
       >
-        <div className="mt-4 flex items-baseline gap-2">
+        <div className={cn(layout({ alignY: "end", gap: "sm" }), "mt-4")}>
           <span className={valueStyles({ size: "lg" })}>{brl(total)}</span>
           <span className="text-base text-muted-foreground">/ {brl(expected)}</span>
         </div>

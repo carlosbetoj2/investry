@@ -3,15 +3,16 @@ import { ExternalLink, StickyNote, MoreVertical } from "lucide-react";
 import type { Asset } from "../../types/portfolio-types";
 import { useWallet } from "../../context/WalletContext";
 import { assetValue, deltaQuantity, shouldBuy } from "../../domain/portfolio-calculations";
-import EditableField from "../EditableField";
+
 import TickerCell from "./cells/TickerCell";
 import QuantityCell from "./cells/QuantityCell";
-import NoteCell from "./cells/NoteCell";
+import ScoreCell from "./cells/ScoreCell";
+import AveragePriceCell from "./cells/AveragePriceCell";
+
 import { brl, pct } from "@/shared/utils/format";
 import { cn } from "@/lib/cn";
-import { button, layout, textElement } from "@/styles";
-
-import { portfolioRowStyles, buyBadgeStyles, actionButtonStyles } from "./styles";
+import { badge, layout, textElement } from "@/styles";
+import { actionButtonStyles } from "./styles";
 
 interface PortfolioRowProps {
   asset: Asset;
@@ -51,45 +52,57 @@ const PortfolioRow = ({ asset, totalPortfolio, idealQuantity }: PortfolioRowProp
   return (
     <div
       className={cn(
-        layout({ align: "center" }),
-        textElement({ textSize: "sm" }),
-        button({ variant: "hover" }),
-        "grid grid-cols-12 border-b border-border/50 px-6 py-3",
+        layout({ alignX: "start", alignY: "center" }),
+        textElement({ textSize: "sm", textColor: "dark", fontWeight: "medium" }),
+        "grid grid-cols-[1.64fr_1.24fr_repeat(9,minmax(0,1fr))]",
+        "odd:bg-slate-100/40 even:bg-white",
+        "border-b border-border/50 px-6 hover:bg-gray-100/60 ",
       )}
     >
-      <div className="col-span-2">
-        <TickerCell ticker={asset.ticker} category={asset.category} />
+      <div
+        className={cn(
+          textElement({ textSize: "sm" }),
+          layout({ direction: "fixedBox", layer: "up" }),
+          "shadow-[6px_0_18px_-14px_rgba(0,0,0,0.35)] py-5 ",
+        )}
+      >
+        <TickerCell ticker={asset.ticker} icon={asset.icon} />
       </div>
 
-      <div className="col-span-1">
-        <EditableField value={asset.averagePrice} onCommit={onPrice} format={brl} />
+      <div>
+        <AveragePriceCell value={asset.averagePrice} onCommit={onPrice} />
       </div>
 
-      <div className="col-span-1 text-muted-foreground">{brl(asset.price)}</div>
+      <div className={cn(textElement({ textColor: "slate" }))}>{brl(asset.price)}</div>
 
-      <div className="col-span-1">
+      <div>
         <QuantityCell quantity={asset.quantity} delta={delta} onChange={onQty} />
       </div>
 
-      <div className="col-span-1 font-medium">{idealQuantity}</div>
+      <div className={cn(textElement({ textColor: "slate" }))}>{idealQuantity}</div>
 
-      <div className="col-span-1">
-        <span className={buyBadgeStyles({ state: buy ? "buy" : "hold" })}>
+      <div>
+        <span
+          className={cn(
+            badge({ boxSize: "secondaryPill" }),
+            buy ? "bg-success-soft text-success-foreground" : "bg-muted text-muted-foreground",
+          )}
+        >
           {buy ? "SIM" : "NÃO"}
         </span>
       </div>
 
-      <div className="col-span-1 font-medium">{pct(walletPct)}</div>
+      <div className={cn(textElement({ textColor: "slate" }))}>{pct(walletPct)}</div>
 
-      <div className="col-span-1 text-muted-foreground">{pct(idealPct)}</div>
+      <div>{pct(idealPct)}</div>
 
-      <div className="col-span-1 font-medium">{brl(value)}</div>
+      <div className={cn(textElement({ textColor: "slate" }))}>{brl(value)}</div>
 
-      <div className="col-span-1">
-        <NoteCell note={asset.note} onChange={onNote} />
+      <div>
+        <ScoreCell note={asset.note} onChange={onNote} />
       </div>
 
-      <div className="col-span-1 flex items-center gap-2">
+      <div className="flex items-center gap-2">
         <button className={actionButtonStyles()}>
           <ExternalLink className="h-4 w-4" />
         </button>

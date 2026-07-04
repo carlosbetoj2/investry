@@ -7,19 +7,7 @@ import { useWallet } from "../context/WalletContext";
 import { computeIdealQuantity } from "../domain/portfolio-calculations";
 import PortfolioRow from "./PortfolioTable/PortfolioRow";
 
-import {
-  drawerContainer,
-  drawerButton,
-  drawerHeaderGroup,
-  drawerTitle,
-  drawerMetaText,
-  drawerValueBlock,
-  drawerRightGroup,
-  drawerSectionLabel,
-  drawerGridHeader,
-  iconStyle,
-  infoIconStyle,
-} from "./styles";
+import { appearance, drawer, textElement, layout, iconStyle } from "@/styles";
 
 interface PortfolioDrawerProps {
   group: CategoryGroup;
@@ -32,73 +20,126 @@ const PortfolioDrawer = ({ group, totalPortfolio, expanded, onToggle }: Portfoli
   const { targets } = useWallet();
 
   return (
-    <div className={cn(drawerContainer())}>
-      <button type="button" onClick={onToggle} className={cn(drawerButton({ active: expanded }))}>
-        {expanded ? (
-          <ChevronDown className={iconStyle()} />
-        ) : (
-          <ChevronRight className={iconStyle()} />
+    <div className={cn(appearance({ border: "full", rounded: "large" }))}>
+      <button
+        type="button"
+        onClick={onToggle}
+        className={cn(
+          drawer({
+            drawerType: "secondaryDrawer",
+            textColor: "slate",
+            textSize: "lg",
+            fontWeight: "medium",
+            spacing: "medium",
+            active: expanded,
+          }),
+          layout({
+            gap: "xs",
+            screen: "full",
+            align: "between",
+            alignY: "start",
+          }),
+          "px-4 py-[11px]",
         )}
-
-        <div className={cn(drawerHeaderGroup())}>
-          <span className={drawerTitle()}>{group.category}</span>
-          <span className={drawerMetaText()}>{group.assets.length} ativos</span>
-        </div>
-
-        <div className={cn(drawerValueBlock())}>
-          <span className={drawerSectionLabel()}>Valor Total:</span>
-          <span className="font-bold text-foreground">{brl(group.totalValue)}</span>
-          <span className="text-muted-foreground">/ {brl(group.totalExpected)}</span>
-          <Info className={infoIconStyle()} />
-        </div>
-
-        <div className={cn(drawerRightGroup())}>
-          <div>
-            <span className={drawerSectionLabel()}>Variação:</span>{" "}
-            <span className="font-bold">{brl(group.variation)}</span>
+      >
+        <div className={cn(layout({ align: "start" }), "")}>
+          <div className={cn(iconStyle({ iconSize: "xl", iconColor: "primaryColor" }))}>
+            {expanded ? <ChevronDown /> : <ChevronRight />}
           </div>
 
-          <div>
-            <span className={drawerSectionLabel()}>% em Carteira:</span>{" "}
-            <span className="font-bold">{pct(group.walletPercent)}</span>{" "}
-            <span className="text-muted-foreground">{pct(group.targetPercent, 0)} (meta)</span>
+          <span className={cn(textElement({ fontWeight: "extrabold", textColor: "dark" }), "pl-2")}>
+            {group.category}
+          </span>
+          <span className={cn(textElement({ textSize: "sm" }), "pl-2")}>
+            {group.assets.length} ativos
+          </span>
+        </div>
+
+        <div className={cn(layout({ display: "onlyDesktop" }), "gap-24")}>
+          <div className={cn(layout({ alignY: "start" }), appearance({ border: "left" }), "pl-4")}>
+            <span>Valor Total:</span>
+            <span
+              className={cn(textElement({ fontWeight: "extrabold", textColor: "black" }), "pl-2")}
+            >
+              {brl(group.totalValue)}
+            </span>
+            <span className={cn(textElement({ textSize: "sm" }), "pl-2")}>
+              {" "}
+              / {brl(group.totalExpected)}
+            </span>
+            <Info className={cn(iconStyle({ iconSize: "sm", animation: "zoom" }), "ml-1")} />
+          </div>
+
+          <div className={cn(appearance({ border: "left" }), "pl-4")}>
+            <span>Variação:</span>
+            <span
+              className={cn(textElement({ textColor: "black", fontWeight: "extrabold" }), "pl-2")}
+            >
+              {brl(group.variation)}
+            </span>
+          </div>
+
+          <div className={cn(layout({ alignY: "start" }), appearance({ border: "left" }), "pl-4")}>
+            <span>% em Carteira:</span>
+            <span
+              className={cn(textElement({ textColor: "black", fontWeight: "extrabold" }), "pl-2")}
+            >
+              {pct(group.walletPercent)}
+            </span>
+            <span className={cn(textElement({ textSize: "md" }), "pl-2")}>
+              {pct(group.targetPercent, 0)} (meta)
+            </span>
           </div>
         </div>
       </button>
 
       {expanded && (
-        <div>
-          <div className={cn(drawerGridHeader())}>
-            <div className="col-span-2">Ativo</div>
-            <div className="col-span-1">Preço Médio</div>
-            <div className="col-span-1">Cotação</div>
-            <div className="col-span-1">Quantidade</div>
-            <div className="col-span-1">Qtn. Ideal</div>
-            <div className="col-span-1">Comprar?</div>
-            <div className="col-span-1">% Carteira</div>
-            <div className="col-span-1">% Ideal</div>
-            <div className="col-span-1">Saldo</div>
-            <div className="col-span-1">Nota</div>
-            <div className="col-span-1">Opções</div>
+        <div className={cn(layout({ direction: "row", display: "block" }))}>
+          <div className="min-w-max">
+            <div
+              className={cn(
+                layout({ gap: "sm" }),
+                textElement({
+                  textSize: "sm",
+                  fontWeight: "semibold",
+                  spacing: "large",
+                  textColor: "black",
+                }),
+                appearance({ bg: "gray" }),
+                "grid grid-cols-[1.64fr_1.24fr_repeat(9,minmax(0,1fr))] px-6 border-b border-border py-1",
+              )}
+            >
+              <div className={cn(layout({ direction: "fixedBox", layer: "up" }))}>Ativo</div>
+              <div>Preço Médio</div>
+              <div>Cotação</div>
+              <div>Quantidade</div>
+              <div>Qtn. Ideal</div>
+              <div>Comprar?</div>
+              <div>% Carteira</div>
+              <div>% Ideal</div>
+              <div>Saldo</div>
+              <div>Nota</div>
+              <div>Opções</div>
+            </div>
+
+            {group.assets.map((asset) => {
+              const ideal = computeIdealQuantity(
+                asset,
+                totalPortfolio,
+                targets[asset.category],
+                group.assets.length,
+              );
+
+              return (
+                <PortfolioRow
+                  key={asset.id}
+                  asset={asset}
+                  totalPortfolio={totalPortfolio}
+                  idealQuantity={ideal}
+                />
+              );
+            })}
           </div>
-
-          {group.assets.map((asset) => {
-            const ideal = computeIdealQuantity(
-              asset,
-              totalPortfolio,
-              targets[asset.category],
-              group.assets.length,
-            );
-
-            return (
-              <PortfolioRow
-                key={asset.id}
-                asset={asset}
-                totalPortfolio={totalPortfolio}
-                idealQuantity={ideal}
-              />
-            );
-          })}
         </div>
       )}
     </div>

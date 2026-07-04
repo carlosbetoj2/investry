@@ -35,19 +35,19 @@ const HeaderMetric = ({
     <button
       type="button"
       onClick={onClick}
-      className={cn(layout({ align: "center", direction: "row" }))}
+      className={cn(layout({ alignX: "center", alignY: "start" }), "ml-11 mr-11")}
     >
-      <div className={cn(badge({ shadow: "sm", boxSize: "sm", tone: tone }), "mr-4")}>
-        <div className={cn(iconStyle({ iconSize: "lg" }))}>{icon}</div>
+      <div className={cn(badge({ boxSize: "md", bgTone: tone }), "mr-4 mt-2")}>
+        <div className={cn(iconStyle({ iconSize: "xl" }))}>{icon}</div>
       </div>
 
-      <div className="my-[6px]">
-        <div className={cn(layout({ align: "start" }))}>
+      <div className={cn(layout({ direction: "fixedSize", display: "block" }))}>
+        <div className={cn(layout({ alignX: "start", alignY: "center" }))}>
           <div
             className={cn(
               "uppercase",
               textElement({
-                textSize: "md",
+                textSize: "sm",
                 fontWeight: "medium",
                 spacing: "large",
                 textColor: "slate",
@@ -58,7 +58,7 @@ const HeaderMetric = ({
           </div>
         </div>
 
-        <div className={cn(layout({ gap: "sm" }), "items-baseline")}>
+        <div className={cn(layout({ gap: "sm", alignX: "start" }), "items-baseline")}>
           <span
             className={cn(textElement({ textSize: "xl", fontWeight: "bold", textColor: "dark" }))}
           >
@@ -68,7 +68,7 @@ const HeaderMetric = ({
           {delta && (
             <div
               className={cn(
-                layout({ align: "center", gap: "xs" }),
+                layout({ alignX: "center", alignY: "start", gap: "xs" }),
                 delta.positive ? "text-success" : "text-destructive",
               )}
             >
@@ -89,7 +89,8 @@ const HeaderMetric = ({
         {hint && (
           <div
             className={cn(
-              textElement({ textSize: "md", fontWeight: "medium", textColor: "slate" }),
+              textElement({ textSize: "sm", fontWeight: "medium", textColor: "slate" }),
+              layout({ alignX: "start" }),
             )}
           >
             {editable ? "Clique para editar" : hint}

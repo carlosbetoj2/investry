@@ -54,9 +54,7 @@ export const tickerBadge = cva(
   },
 );
 
-export const tickerText = cva("font-semibold text-foreground");
-
-export const tickerContainer = cva("flex items-center gap-3");
+export const tickerText = cva(" font-semibold text-foreground");
 
 export const tickerBookmark = cva(
   "h-4 w-4 text-muted-foreground/50 hover:text-info cursor-pointer transition-colors",

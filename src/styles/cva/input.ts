@@ -1,10 +1,10 @@
 import { tv } from "tailwind-variants";
 import { iconSize, buttonSize, buttonType, boxSize } from "../primitives";
 import { animation } from "../patterns";
-import { fontWeight, gap, textColor, textSize } from "../tokens";
+import { gap, textSize, textColor, fontWeight } from "../tokens";
 
-export const button = tv({
-  base: "inline-flex items-center justify-center rounded-lg transition-colors cursor-pointer",
+export const input = tv({
+  base: "inline-flex items-center justify-center rounded-lg transition cursor-text",
 
   variants: {
     gap,

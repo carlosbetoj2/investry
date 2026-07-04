@@ -7,11 +7,15 @@ export const badge = tv({
   base: "inline-flex items-center justify-center rounded-lg",
 
   variants: {
-    tone: {
-      info: "bg-info text-white",
-      success: "bg-success text-white",
-      warning: "bg-warning text-white",
-      violet: "bg-violet text-white",
+    bgTone: {
+      info: "bg-info",
+      success: "bg-success",
+      warning: "bg-warning",
+      violet: "bg-violet",
+    },
+    textTone: {
+      info: "text-info",
+      success: "text-success",
     },
 
     boxSize,

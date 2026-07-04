@@ -3,10 +3,10 @@ import SectionCard from "@/shared/components/cards/SectionCard";
 import PortfolioTable from "@/features/portfolio/components/PortfolioTable/PortfolioTable";
 import { cn } from "@/lib/utils";
 
-import { tabsContainerStyles, tabButtonStyles, tabContentPlaceholderStyles } from "./styles";
+import { appearance, layout, navigationTab, textElement } from "@/styles";
+import { tabContentPlaceholderStyles } from "./styles";
 
 const subTabs = ["Carteira", "Rentabilidade", "Composição"] as const;
-
 type Tab = (typeof subTabs)[number];
 
 const NegotiationsSection = () => {
@@ -16,19 +16,29 @@ const NegotiationsSection = () => {
     <SectionCard
       title="Negociações"
       action={
-        <div className={tabsContainerStyles()}>
-          {subTabs.map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={tabButtonStyles({ active: tab === t })}
-            >
-              {t}
-            </button>
-          ))}
+        <div className={cn(layout({}))}>
+          {subTabs.map((t) => {
+            const isActive = tab === t;
+
+            return (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className={cn(
+                  navigationTab({ active: isActive }),
+                  textElement({ textSize: "xs", fontWeight: "semibold" }),
+                  "px-3 md:px-5 relative",
+                )}
+              >
+                {t}
+
+                {isActive && <span className={navigationTab({ indicator: "pill" })} />}
+              </button>
+            );
+          })}
         </div>
       }
-      bodyClassName="p-4"
+      bodyClassName="p-3"
     >
       {tab === "Carteira" && <PortfolioTable />}
 

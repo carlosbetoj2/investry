@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { tabButtonStyles, activeIndicatorStyles } from "./styles";
+import { appearance, layout, navigationTab, textElement } from "@/styles";
 
 interface TabNavigationProps {
   tabs: string[];
@@ -9,24 +9,31 @@ interface TabNavigationProps {
 
 const TabNavigation = ({ tabs, activeTab, onTabChange }: TabNavigationProps) => {
   return (
-    <nav className="flex items-center justify-around border-b border-border">
-      {tabs.map((tab) => {
-        const isActive = activeTab === tab;
+    <nav
+      className={cn(layout({ align: "center", direction: "row" }), appearance({ border: "full" }))}
+    >
+      <div className={cn(layout({ align: "around" }), "w-full")}>
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab;
 
-        return (
-          <button
-            key={tab}
-            onClick={() => onTabChange(tab)}
-            className={cn(tabButtonStyles({ active: isActive }))}
-          >
-            {tab}
+          return (
+            <button
+              key={tab}
+              onClick={() => onTabChange(tab)}
+              className={cn(
+                navigationTab({ active: isActive }),
+                textElement({ textSize: "sm", fontWeight: "semibold" }),
+                "px-6 py-4",
+              )}
+            >
+              {tab}
 
-            {isActive && <span className={activeIndicatorStyles()} />}
-          </button>
-        );
-      })}
+              {isActive && <span className={cn(navigationTab({ indicator: "bar" }))} />}
+            </button>
+          );
+        })}
+      </div>
     </nav>
   );
 };
-
 export default TabNavigation;

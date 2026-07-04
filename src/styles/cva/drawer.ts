@@ -1,18 +1,21 @@
 import { tv } from "tailwind-variants";
 import { fontWeight, spacing, textColor, textSize } from "../tokens";
-import { iconSize, buttonSize } from "../primitives";
+import { iconSize, buttonSize, buttonType } from "../primitives";
 import { animation } from "../patterns";
 
 export const drawer = tv({
   base: "inline-flex items-center justify-center rounded-lg transition cursor-pointer",
 
   variants: {
-    variant: {
-      ghost: "hover:bg-white/10",
-      outline: "border border-slate-400 hover:bg-white/10",
-      solid: "bg-blue-600 text-white",
+    drawerType: {
+      primaryDrawer: "hover:bg-white/10",
+      secondaryDrawer: "bg-secondary/40 hover:bg-secondary",
+    },
+    active: {
+      true: "bg-secondary ",
     },
 
+    buttonType,
     animation,
     buttonSize,
     iconSize,

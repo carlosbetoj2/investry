@@ -1,7 +1,10 @@
-export const visibility = {
+export const display = {
   onlyMobile: "flex lg:hidden",
   onlyDesktop: "hidden lg:flex",
-  hiddenMobile: "hidden md:flex",
+  flex: "flex",
+  block: "block",
+  grid: "grid",
+  inline: "inline",
 };
 
 export const animation = {

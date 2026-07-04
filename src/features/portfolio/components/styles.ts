@@ -16,11 +16,11 @@ export const editableFieldButton = cva(
 );
 
 export const editableFieldInput = cva(
-  "w-24 rounded-md border border-ring bg-card px-2 py-1 text-sm font-medium text-foreground outline-none",
+  "w-24  rounded-md border border-ring bg-card px-2 py-1 text-sm font-medium text-foreground outline-none",
   {
     variants: {
       invalid: {
-        true: "border-red-500 focus:ring-red-500",
+        true: "focus:ring-red-500",
         false: "",
       },
     },
@@ -30,7 +30,7 @@ export const editableFieldInput = cva(
   },
 );
 
-export const drawerContainer = cva("overflow-hidden rounded-xl border border-border");
+export const drawerContainer = cva("overflow-hidden rounded-xl ");
 
 export const drawerButton = cva(
   "flex w-full items-center gap-4 px-6 py-4 text-left transition-colors",
@@ -60,7 +60,7 @@ export const drawerRightGroup = cva("ml-auto flex items-center gap-6 text-sm");
 export const drawerSectionLabel = cva("text-xs uppercase tracking-wider text-muted-foreground");
 
 export const drawerGridHeader = cva(
-  "grid grid-cols-12 gap-2 border-b border-border bg-card px-6 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground",
+  "grid grid-cols-[1.75fr_1fr_repeat(9,minmax(0,1fr))] gap-2 border-b border-border bg-card px-6 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground",
 );
 
 export const iconStyle = cva("h-4 w-4 text-muted-foreground");

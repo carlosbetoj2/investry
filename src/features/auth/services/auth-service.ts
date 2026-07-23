@@ -1,4 +1,5 @@
 import { supabase } from "../../../lib/supabase/client";
+import { toAppUrl } from "@/lib/base-path";
 
 export async function signUp(email: string, password: string, nome: string) {
   return supabase.auth.signUp({
@@ -33,6 +34,6 @@ export function onAuthStateChange(callback: Parameters<typeof supabase.auth.onAu
 
 export async function resetPassword(email: string) {
   return supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin + "/recovery-password",
+    redirectTo: toAppUrl("/recovery-password"),
   });
 }

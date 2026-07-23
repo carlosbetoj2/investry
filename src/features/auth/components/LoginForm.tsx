@@ -4,6 +4,7 @@ import { Mail, Lock } from "lucide-react";
 import { signIn } from "@/features/auth/services/auth-service";
 import { textElement, layout, inputType, iconStyle, buttonType } from "@/styles";
 import { cn } from "@/lib/cn";
+import { appHomeHref } from "@/lib/base-path";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -56,7 +57,7 @@ export default function LoginForm() {
       return;
     }
 
-    window.location.href = "/";
+    window.location.assign(appHomeHref());
   }
 
   return (

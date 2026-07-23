@@ -4,6 +4,7 @@ import { Mail } from "lucide-react";
 import { getSession, resetPassword } from "@/features/auth/services/auth-service";
 import { layout, textElement, iconStyle, inputType, buttonType } from "@/styles";
 import { cn } from "@/lib/cn";
+import { appHomeHref } from "@/lib/base-path";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -24,7 +25,7 @@ export default function RecoveryPasswordForm() {
       }
 
       if (data.session?.user) {
-        window.location.href = "/";
+        window.location.assign(appHomeHref());
       }
     });
 

@@ -5,22 +5,12 @@ import {
   createRootRouteWithContext,
   useRouter,
   HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-import { type ReactNode } from "react";
 
 import appCss from "../app.css?url";
-import "@/styles/global.css";
 
-import {
-  pageLayout,
-  container,
-  title,
-  subtitle,
-  buttonPrimary,
-  buttonSecondary,
-  spacing,
-} from "./styles";
+import { pageLayout, container, title, subtitle, buttonPrimary, buttonSecondary, spacing } from "./-styles";
+import { appHomeHref } from "@/lib/base-path";
 
 function NotFoundComponent() {
   return (
@@ -66,7 +56,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             Try again
           </button>
 
-          <a href="/" className={buttonSecondary()}>
+          <a href={appHomeHref()} className={buttonSecondary()}>
             Go home
           </a>
         </div>
@@ -87,31 +77,17 @@ export const Route = createRootRouteWithContext<{
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
+      <HeadContent />
       <Outlet />
     </QueryClientProvider>
   );

@@ -1,24 +1,31 @@
-import path from "path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import svgr from "vite-plugin-svgr";
 import reactTrace from "./src/plugins/vite-plugin-react-trace";
 
-export default defineConfig({
+const srcDir = fileURLToPath(new URL("./src", import.meta.url));
+
+export default defineConfig(() => ({
+  base: "./",
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-    },
     tsconfigPaths: true,
+    alias: {
+      "@": srcDir,
+    },
+  },
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
   },
   plugins: [
-    tanstackStart({ server: { entry: "server" } }),
+    tanstackRouter(),
     tailwindcss(),
     react(),
     // vite-plugin-react-trace: instrument JSX with `data-path`
     reactTrace({ enabled: true, root: "src", strategy: "file-path" }),
     svgr(),
   ],
-});
+}));

@@ -9,7 +9,7 @@ import reactTrace from "./src/plugins/vite-plugin-react-trace";
 const srcDir = fileURLToPath(new URL("./src", import.meta.url));
 
 export default defineConfig(() => ({
-  base: "./",
+  base: "/investry/",
   resolve: {
     tsconfigPaths: true,
     alias: {

@@ -1,13 +1,6 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import type { ReactNode } from "react";
-
-import {
-  sectionCardStyles,
-  sectionCardHeaderStyles,
-  sectionCardTitleStyles,
-  sectionCardBodyStyles,
-} from "./styles";
-import { appearance, layout, textElement } from "@/styles";
+import { appearance, layout } from "@/styles";
 
 interface SectionCardProps {
   title?: string;
@@ -18,16 +11,9 @@ interface SectionCardProps {
   children: ReactNode;
 }
 
-const SectionCard = ({
-  title,
-  action,
-  className,
-  bodyClassName,
-  bodyPadding = "default",
-  children,
-}: SectionCardProps) => {
+const SectionCard = ({ title, action, children }: SectionCardProps) => {
   return (
-    <section className={cn(appearance({ rounded: "large", border: "full", shadow: "large" }))}>
+    <section className={cn(appearance({ rounded: "large", border: "full", shadow: "small" }))}>
       {(title || action) && (
         <header
           className={cn(
@@ -35,10 +21,9 @@ const SectionCard = ({
               align: "around",
               alignY: "center",
               direction: "responsiveRow",
-              display: "grid",
             }),
             appearance({ border: "lower" }),
-            "px-2 py-5",
+            "py-5",
           )}
         >
           {/* {title && (
@@ -47,7 +32,7 @@ const SectionCard = ({
                 textElement({
                   textSize: "lg",
                   fontWeight: "bold",
-                  spacing: "large",
+                  spacing: "medium",
                   textColor: "dark",
                 }),
                 "uppercase",
@@ -60,7 +45,7 @@ const SectionCard = ({
         </header>
       )}
 
-      <div className="p-3">{children}</div>
+      <div className="p-3 md:p-4">{children}</div>
     </section>
   );
 };

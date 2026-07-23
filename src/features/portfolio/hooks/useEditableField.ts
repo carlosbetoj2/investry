@@ -26,7 +26,6 @@ export const useEditableField = <T>({
   const validateRef = useRef(validate);
   const valueRef = useRef(value);
 
-  // mantém refs atualizados
   useEffect(() => {
     parseDraftRef.current = parseDraft;
   }, [parseDraft]);
@@ -43,14 +42,12 @@ export const useEditableField = <T>({
     valueRef.current = value;
   }, [value]);
 
-  // sincroniza draft quando valor externo muda
   useEffect(() => {
     if (!editing) {
       setDraft(formatDraftRef.current(value));
     }
   }, [value, editing]);
 
-  // seleção automática ao entrar em edição
   useEffect(() => {
     if (editing) {
       inputRef.current?.select();

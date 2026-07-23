@@ -1,9 +1,4 @@
-import {
-  dollar,
-  coin,
-  availableBalance as availableBalanceIcon,
-  upGraph,
-} from "@/assets/images/index.ts";
+import { Dollar, Coin, AvailableBalance, UpGraph } from "@/assets/svg";
 
 import HeaderMetric from "@/shared/components/metrics/HeaderMetric";
 import { useWallet } from "@/features/portfolio/context/WalletContext";
@@ -27,7 +22,7 @@ const MetricsBar = () => {
     >
       <div>
         <HeaderMetric
-          icon={<img src={dollar} alt="dólar" />}
+          icon={<img src={Dollar} alt="dólar" />}
           label="Patrimônio Total"
           value={brl(total)}
           tone="info"
@@ -37,7 +32,7 @@ const MetricsBar = () => {
 
       <div className={layout()}>
         <HeaderMetric
-          icon={<img src={upGraph} alt="seta gráfica" />}
+          icon={<img src={UpGraph} alt="seta gráfica" />}
           label="Lucro / Prejuízo"
           value={brl(profit)}
           tone="success"
@@ -50,7 +45,7 @@ const MetricsBar = () => {
 
       <div className={layout()}>
         <HeaderMetric
-          icon={<img src={coin} alt="moeda" />}
+          icon={<img src={Coin} alt="moeda" />}
           label="Total Proventos"
           value={brl(proventos)}
           tone="warning"
@@ -70,7 +65,7 @@ const MetricsBar = () => {
         }}
       >
         <HeaderMetric
-          icon={<img src={availableBalanceIcon} alt="saldo disponível" />}
+          icon={<img src={AvailableBalance} alt="saldo disponível" />}
           label="Saldo Disponível"
           value={brl(availableBalance)}
           tone="violet"

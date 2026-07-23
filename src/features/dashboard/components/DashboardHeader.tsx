@@ -1,45 +1,52 @@
 import { Eye, Menu } from "lucide-react";
 
-import logo from "@/assets/logo/investry-icon.webp";
+import { investryIcon } from "@/assets/images";
 
-import { useWallet } from "@/features/portfolio/context/WalletContext";
+import { useWallet } from "@/features/portfolio/hooks/useWallet";
 
 import MetricsBar from "./MetricsBar";
 
-import { UpArrowIcon, PlusIcon, B3Icon } from "@/assets/svg";
+import { PlusIcon, B3Icon } from "@/assets/svg";
 
 import { cn } from "@/lib/cn";
 
-import { button, appearance, layout, iconStyle, textElement, drawer } from "@/styles";
+import { buttonType, appearance, layout, iconStyle, textElement } from "@/styles";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { selectType } from "@/styles/tv/selectType";
 const marginLeft = "ml-3";
 
-const walletLabel: Record<string, string> = {
-  previdenciaria: "Previdenciária",
-  swingtrade: "Swing Trade",
-};
-
 const DashboardHeader = () => {
-  const { wallet, setWallet } = useWallet();
+  const { wallet, wallets, setWallet, loading } = useWallet();
 
   return (
     <header className={cn(appearance({ bg: "primaryColor", textColor: "white" }))}>
       <div
         className={cn(
           layout({ align: "between", direction: "row" }),
-          "mx-auto md:py-[9px] py-0 max-w-[94%] lg:max-w-[74%]",
+          "mx-auto px-2 md:py-[9px] max-w-[94%] lg:max-w-[75%] h-23",
         )}
       >
         <div className={cn(layout({ align: "center" }), "order-1 md:order-1 md:mr-8")}>
           <button
-            className={cn(button({ animation: "zoom" }))}
+            className={cn(buttonType({ animation: "zoom" }))}
             onClick={() => window.location.reload()}
           >
-            <img src={logo} alt="logo investry" className={cn(iconStyle({ iconSize: "logo" }))} />
+            <img
+              src={investryIcon}
+              alt="logo investry"
+              className={cn(iconStyle({ width: "logo" }))}
+            />
             <span
               className={cn(
                 textElement({
-                  textSize: "xxl",
-                  spacing: "large",
+                  textSize: "logo",
+                  spacing: "medium",
                   fontWeight: "semibold",
                 }),
                 marginLeft,
@@ -50,43 +57,57 @@ const DashboardHeader = () => {
           </button>
         </div>
 
-        <div className={cn(layout({ display: "onlyDesktop" }), "order-5 md:order-2")}>
+        <div
+          className={cn(layout({ screen: "onlyDesktop", alignY: "center" }), "order-5 md:order-2")}
+        >
+          <Select value={wallet?.id ?? ""} onValueChange={setWallet} disabled={loading}>
+            <SelectTrigger
+              className={cn(
+                selectType({
+                  ghostType: "primaryGhost",
+                  boxSize: "secondaryPill",
+                  textSize: "md",
+                  fontWeight: "semibold",
+                  spacing: "small",
+                  height: "xl",
+                }),
+              )}
+            >
+              <SelectValue
+                placeholder={loading ? "Carregando carteiras" : "Selecione a carteira"}
+              />
+            </SelectTrigger>
+
+            <SelectContent className="">
+              {wallets.map((wallet) => (
+                <SelectItem key={wallet.id} value={wallet.id}>
+                  {wallet.nome}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div
+          className={cn(layout({ alignY: "center" }), "order-2 pr-0 md:order-3 md:ml-2 ml-auto")}
+        >
           <button
-            onClick={() => setWallet(wallet === "previdenciaria" ? "swingtrade" : "previdenciaria")}
-            className={cn(
-              drawer({
-                drawerType: "primaryDrawer",
-                buttonSize: "pill",
-                textSize: "md",
-                fontWeight: "semibold",
-                spacing: "medium",
-              }),
-            )}
+            className={cn(buttonType({ ghostType: "primaryGhost", boxSize: "secondaryPill" }))}
           >
-            {walletLabel[wallet]}
-            <UpArrowIcon
-              aria-label="seta para cima"
-              className={cn(iconStyle({ iconSize: "xs" }), marginLeft)}
-            />
+            <Eye className={cn(iconStyle({ width: "xl", animation: "zoom" }))} />
           </button>
         </div>
 
-        <div className="order-2 pr-0 md:order-3 md:ml-1 ml-auto">
-          <button className={cn(button({ buttonType: "primaryGhost", buttonSize: "pill" }))}>
-            <Eye className={cn(iconStyle({ iconSize: "xl", animation: "zoom" }))} />
-          </button>
-        </div>
-
-        <div className="md:order-6 md:ml-10">
+        <div className={cn(layout({ alignY: "center" }), "md:order-6 md:ml-10")}>
           <button
             className={cn(
-              button({ buttonSize: "pill" }),
-              layout({ display: "onlyDesktop" }),
+              buttonType({ boxSize: "secondaryPill" }),
+              layout({ screen: "onlyDesktop" }),
               appearance({ rounded: "full" }),
               "relative md:border pr-12 md:border-slate-400",
             )}
           >
-            <Menu className={cn(iconStyle({ animation: "zoom", iconSize: "xl" }))} />
+            <Menu className={cn(iconStyle({ animation: "zoom", width: "xl" }))} />
 
             <span
               className={cn(
@@ -101,34 +122,37 @@ const DashboardHeader = () => {
 
           <button
             className={cn(
-              layout({ display: "onlyMobile" }),
-              button({ buttonSize: "pill" }),
+              layout({ screen: "onlyMobile" }),
+              buttonType({ boxSize: "secondaryPill" }),
               "mr-3 ",
             )}
           >
-            <Menu className={cn(iconStyle({ animation: "zoom", iconSize: "xl" }))} />
+            <Menu className={cn(iconStyle({ animation: "zoom", width: "xl" }))} />
           </button>
         </div>
 
         <div
-          className={cn(layout({ gap: "lg", direction: "row" }), "order-6 md:order-4 md:ml-auto")}
+          className={cn(
+            layout({ gap: "lg", direction: "row", alignY: "center" }),
+            "order-6 md:order-4 md:ml-auto",
+          )}
         >
           <button
             className={cn(
-              button({ buttonType: "primaryGhost", buttonSize: "pill" }),
-              layout({ display: "onlyDesktop" }),
+              buttonType({ ghostType: "primaryGhost", boxSize: "secondaryPill" }),
+              layout({ screen: "onlyDesktop" }),
             )}
           >
             <B3Icon
               aria-label="símbolo da B3"
-              className={cn(iconStyle({ iconSize: "lg", animation: "zoom" }))}
+              className={cn(iconStyle({ width: "lg", animation: "zoom" }))}
             />
             <span
               className={cn(
                 textElement({
                   textSize: "sm",
                   fontWeight: "semibold",
-                  spacing: "medium",
+                  spacing: "small",
                 }),
                 marginLeft,
               )}
@@ -139,20 +163,20 @@ const DashboardHeader = () => {
 
           <button
             className={cn(
-              button({ buttonType: "primaryGhost", buttonSize: "pill" }),
-              layout({ display: "onlyDesktop" }),
+              buttonType({ ghostType: "primaryGhost", boxSize: "secondaryPill" }),
+              layout({ screen: "onlyDesktop" }),
             )}
           >
             <PlusIcon
               arial-label="símbolo adição de ativo"
-              className={cn(iconStyle({ animation: "zoom", iconSize: "lg" }))}
+              className={cn(iconStyle({ animation: "zoom", width: "lg" }))}
             />
             <span
               className={cn(
                 textElement({
                   textSize: "sm",
                   fontWeight: "semibold",
-                  spacing: "medium",
+                  spacing: "small",
                 }),
                 marginLeft,
               )}
@@ -165,51 +189,55 @@ const DashboardHeader = () => {
 
       <div
         className={cn(
-          appearance({ bg: "white", shadow: "large", rounded: "largeTop" }),
+          appearance({ bg: "white", shadow: "small", rounded: "largeTop" }),
           layout({ layer: "up", direction: "col" }),
-          "-mt-2 md:-mt-3 ",
+          "-mt-2 md:-mt-3",
         )}
       >
         <div
           className={cn(
             appearance({ bg: "secundaryColor", border: "divider", rounded: "largeTop" }),
-            layout({ display: "onlyMobile" }),
+            layout({ screen: "onlyMobile" }),
+            "py-4",
           )}
         >
           <div className={cn(layout({ align: "center" }), "flex-1")}>
-            <button
-              onClick={() =>
-                setWallet(wallet === "previdenciaria" ? "swingtrade" : "previdenciaria")
-              }
-              className={cn(
-                drawer({
-                  buttonType: "primaryGhost",
-                  textSize: "sm",
-                  fontWeight: "semibold",
-                  spacing: "medium",
-                }),
-                "my-4",
-              )}
-            >
-              {walletLabel[wallet]}
+            <Select value={wallet?.id ?? ""} onValueChange={setWallet} disabled={loading}>
+              <SelectTrigger
+                className={cn(
+                  buttonType({
+                    ghostType: "primaryGhost",
+                    textSize: "sm",
+                    fontWeight: "semibold",
+                    spacing: "small",
+                  }),
+                )}
+              >
+                <SelectValue
+                  placeholder={loading ? "Carregando carteiras" : "Selecione a carteira"}
+                />
+              </SelectTrigger>
 
-              <UpArrowIcon
-                aria-label="seta para cima"
-                className={cn(iconStyle({ iconSize: "lg" }), marginLeft)}
-              />
-            </button>
+              <SelectContent>
+                {wallets.map((wallet) => (
+                  <SelectItem key={wallet.id} value={wallet.id}>
+                    {wallet.nome}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-          <button className={cn(button(), "flex-1")}>
+          <button className={cn(buttonType(), "flex-1")}>
             <PlusIcon
               arial-label="símbolo adição de ativo"
-              className={cn(iconStyle({ animation: "zoom", iconSize: "lg" }))}
+              className={cn(iconStyle({ animation: "zoom", width: "lg" }))}
             />
             <span
               className={cn(
                 textElement({
                   textSize: "sm",
                   fontWeight: "semibold",
-                  spacing: "medium",
+                  spacing: "small",
                 }),
                 marginLeft,
               )}

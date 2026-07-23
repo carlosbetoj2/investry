@@ -24,7 +24,7 @@ const Card = ({
   children: React.ReactNode;
   tone?: "info" | "success";
 }) => (
-  <div className={cn(appearance({ rounded: "large", border: "full", shadow: "large" }), "p-4")}>
+  <div className={cn(appearance({ rounded: "large", border: "full", shadow: "small" }), "p-4")}>
     <div className={cn(layout({ align: "between" }))}>
       <h4 className={cn(badge({ textTone: tone }))}>{title}</h4>
       {icon}
@@ -40,7 +40,7 @@ const FinancialSummary = () => {
     <div className={cn(badge({ textTone: "info" }), layout({ gap: "md" }), "grid md:grid-cols-2")}>
       <Card
         title="Valor Aplicado / Esperado"
-        icon={<ArrowUpRight className={cn(iconStyle({ iconSize: "md" }))} />}
+        icon={<ArrowUpRight className={cn(iconStyle({ width: "md" }))} />}
       >
         <div className={cn(layout({ alignY: "end", gap: "sm" }), "mt-4")}>
           <span className={valueStyles({ size: "lg" })}>{brl(total)}</span>

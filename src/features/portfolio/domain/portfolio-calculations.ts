@@ -8,7 +8,7 @@ import type {
 export const assetValue = (a: Pick<Asset, "price" | "quantity">): number => a.price * a.quantity;
 
 export const assetInvested = (a: Pick<Asset, "averagePrice" | "quantity">): number =>
-  a.averagePrice * a.quantity;
+  (a.averagePrice ?? 0) * a.quantity;
 
 export const assetProfit = (a: Asset): number => assetValue(a) - assetInvested(a);
 
@@ -20,6 +20,13 @@ export const totalInvested = (assets: Asset[]): number =>
 
 export const walletPercent = (asset: Asset, total: number): number =>
   total > 0 ? assetValue(asset) / total : 0;
+
+export const getTargetPercent = (targets: CategoryTargets, category: AssetCategory): number => {
+  if (category === "Ações") return targets.Ações;
+  if (category === "FIIs") return targets.FIIs;
+  if (category === "ETFs") return targets.ETFs;
+  return 0;
+};
 
 export const categoryValue = (assets: Asset[], category: AssetCategory): number =>
   assets.filter((a) => a.category === category).reduce((s, a) => s + assetValue(a), 0);
@@ -35,7 +42,7 @@ export const computeIdealQuantity = (
   targetPercent: number,
   assetsInCategory: number,
 ): number => {
-  if (!asset.price || assetsInCategory <= 0) return 0;
+  if (!asset.price || targetPercent <= 0 || assetsInCategory <= 0) return 0;
   const allocation = (targetPercent * totalPortfolio) / assetsInCategory;
   return Math.round(allocation / asset.price);
 };
@@ -52,14 +59,14 @@ export const groupByCategory = (assets: Asset[], targets: CategoryTargets): Cate
     .map<CategoryGroup>((category) => {
       const catAssets = assets.filter((a) => a.category === category);
       const totalValue = catAssets.reduce((s, a) => s + assetValue(a), 0);
-      const targetPercent = targets[category] ?? 0;
+      const targetPercent = getTargetPercent(targets, category);
       const totalExpected = total * targetPercent;
       return {
         category,
         assets: catAssets,
         totalValue,
         totalExpected,
-        variation: 0,
+        variation: totalValue - totalExpected,
         walletPercent: total > 0 ? totalValue / total : 0,
         targetPercent,
       };

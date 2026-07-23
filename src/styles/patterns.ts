@@ -1,12 +1,13 @@
 export const display = {
-  onlyMobile: "flex lg:hidden",
-  onlyDesktop: "hidden lg:flex",
   flex: "flex",
   block: "block",
   grid: "grid",
-  inline: "inline",
+  inline: "inline-flex",
+  relative: "relative",
+  absolute: "absolute",
 };
 
 export const animation = {
   zoom: "transform transition duration-150 hover:scale-110",
+  fadeIn: "animate-in fade-in zoom-in-95 duration-500",
 };

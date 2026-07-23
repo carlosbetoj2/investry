@@ -1,13 +1,13 @@
 import { memo } from "react";
 import { ChevronDown, ChevronRight, Info } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { brl, pct } from "@/shared/utils/format";
 import type { CategoryGroup } from "../types/portfolio-types";
-import { useWallet } from "../context/WalletContext";
-import { computeIdealQuantity } from "../domain/portfolio-calculations";
+import { useWallet } from "../hooks/useWallet";
+import { computeIdealQuantity, getTargetPercent } from "../domain/portfolio-calculations";
 import PortfolioRow from "./PortfolioTable/PortfolioRow";
 
-import { appearance, drawer, textElement, layout, iconStyle } from "@/styles";
+import { appearance, dropdownType, textElement, layout, iconStyle } from "@/styles";
 
 interface PortfolioDrawerProps {
   group: CategoryGroup;
@@ -24,26 +24,25 @@ const PortfolioDrawer = ({ group, totalPortfolio, expanded, onToggle }: Portfoli
       <button
         type="button"
         onClick={onToggle}
+        data-path="PortfolioDrawer"
         className={cn(
-          drawer({
-            drawerType: "secondaryDrawer",
-            textColor: "slate",
+          dropdownType({
+            dropdownType: "primaryDropdown",
+            textColor: "blackSlate",
             textSize: "lg",
             fontWeight: "medium",
-            spacing: "medium",
+            spacing: "small",
             active: expanded,
           }),
           layout({
-            gap: "xs",
-            screen: "full",
             align: "between",
             alignY: "start",
           }),
-          "px-4 py-[11px]",
+          "px-4 py-[11px] w-full",
         )}
       >
-        <div className={cn(layout({ align: "start" }), "")}>
-          <div className={cn(iconStyle({ iconSize: "xl", iconColor: "primaryColor" }))}>
+        <div className={cn(layout({ align: "start" }))}>
+          <div className={cn(iconStyle({ width: "xl", iconColor: "primaryColor" }))}>
             {expanded ? <ChevronDown /> : <ChevronRight />}
           </div>
 
@@ -55,7 +54,7 @@ const PortfolioDrawer = ({ group, totalPortfolio, expanded, onToggle }: Portfoli
           </span>
         </div>
 
-        <div className={cn(layout({ display: "onlyDesktop" }), "gap-24")}>
+        <div className={cn(layout({ screen: "onlyDesktop" }), "gap-24")}>
           <div className={cn(layout({ alignY: "start" }), appearance({ border: "left" }), "pl-4")}>
             <span>Valor Total:</span>
             <span
@@ -67,7 +66,7 @@ const PortfolioDrawer = ({ group, totalPortfolio, expanded, onToggle }: Portfoli
               {" "}
               / {brl(group.totalExpected)}
             </span>
-            <Info className={cn(iconStyle({ iconSize: "sm", animation: "zoom" }), "ml-1")} />
+            <Info className={cn(iconStyle({ width: "sm", animation: "zoom" }), "ml-1")} />
           </div>
 
           <div className={cn(appearance({ border: "left" }), "pl-4")}>
@@ -98,15 +97,15 @@ const PortfolioDrawer = ({ group, totalPortfolio, expanded, onToggle }: Portfoli
           <div className="min-w-max">
             <div
               className={cn(
-                layout({ gap: "sm" }),
+                layout({ grid: "table", display: "grid" }),
                 textElement({
                   textSize: "sm",
                   fontWeight: "semibold",
-                  spacing: "large",
+                  spacing: "medium",
                   textColor: "black",
                 }),
                 appearance({ bg: "gray" }),
-                "grid grid-cols-[1.64fr_1.24fr_repeat(9,minmax(0,1fr))] px-6 border-b border-border py-1",
+                "px-5 border-b border-border py-1",
               )}
             >
               <div className={cn(layout({ direction: "fixedBox", layer: "up" }))}>Ativo</div>
@@ -126,7 +125,7 @@ const PortfolioDrawer = ({ group, totalPortfolio, expanded, onToggle }: Portfoli
               const ideal = computeIdealQuantity(
                 asset,
                 totalPortfolio,
-                targets[asset.category],
+                getTargetPercent(targets, asset.category),
                 group.assets.length,
               );
 

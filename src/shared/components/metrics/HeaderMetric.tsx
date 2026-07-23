@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { TrendingUp } from "lucide-react";
 
 import { badge, textElement, layout, iconStyle } from "@/styles";
@@ -38,7 +38,7 @@ const HeaderMetric = ({
       className={cn(layout({ alignX: "center", alignY: "start" }), "ml-11 mr-11")}
     >
       <div className={cn(badge({ boxSize: "md", bgTone: tone }), "mr-4 mt-2")}>
-        <div className={cn(iconStyle({ iconSize: "xl" }))}>{icon}</div>
+        <div className={cn(iconStyle({ width: "xl" }))}>{icon}</div>
       </div>
 
       <div className={cn(layout({ direction: "fixedSize", display: "block" }))}>
@@ -49,8 +49,8 @@ const HeaderMetric = ({
               textElement({
                 textSize: "sm",
                 fontWeight: "medium",
-                spacing: "large",
-                textColor: "slate",
+                spacing: "medium",
+                textColor: "blackSlate",
               }),
             )}
           >
@@ -89,7 +89,7 @@ const HeaderMetric = ({
         {hint && (
           <div
             className={cn(
-              textElement({ textSize: "sm", fontWeight: "medium", textColor: "slate" }),
+              textElement({ textSize: "sm", fontWeight: "medium", textColor: "blackSlate" }),
               layout({ alignX: "start" }),
             )}
           >

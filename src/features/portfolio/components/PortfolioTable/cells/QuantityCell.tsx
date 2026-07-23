@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { FiEdit3 } from "react-icons/fi";
-import { cn } from "@/lib/utils";
-import { button, iconStyle, input, layout } from "@/styles";
+import { cn } from "@/lib/cn";
+import { buttonType, iconStyle, inputType } from "@/styles";
 import { useEditableField } from "../../../hooks/useEditableField";
 
 interface QuantityCellProps {
@@ -27,7 +27,7 @@ const QuantityCell = ({ quantity, delta, onChange }: QuantityCellProps) => {
   const trend = delta > 0 ? "up" : delta < 0 ? "down" : "neutral";
 
   return (
-    <div>
+    <div className="flex items-center">
       {editing ? (
         <input
           ref={inputRef}
@@ -37,18 +37,18 @@ const QuantityCell = ({ quantity, delta, onChange }: QuantityCellProps) => {
           onChange={(e) => setDraft(e.target.value)}
           onBlur={commit}
           onKeyDown={handleKeyDown}
-          className={cn(input({ textColor: "slate", boxSize: "primaryPill" }), "w-20")}
+          className={cn(inputType({ textColor: "blackSlate", boxSize: "primaryPill" }), "w-20")}
         />
       ) : (
         <button
           type="button"
           onClick={startEditing}
-          className={cn(button({ buttonType: "secondaryGhost", boxSize: "primaryPill" }))}
+          className={cn(buttonType({ ghostType: "secondaryGhost", boxSize: "primaryPill" }))}
         >
           <span>{draft}</span>
           <FiEdit3
             className={iconStyle({
-              iconSize: "xl",
+              width: "xl",
               iconColor: "primaryColor",
             })}
           />
@@ -56,7 +56,7 @@ const QuantityCell = ({ quantity, delta, onChange }: QuantityCellProps) => {
       )}
 
       {delta !== 0 && (
-        <span className={cn("text-xs", trend, "flex items-center gap-1")}>
+        <span className="flex items-center text-xs">
           {delta > 0 ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
           {Math.abs(delta)}
         </span>

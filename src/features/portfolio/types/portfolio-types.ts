@@ -1,25 +1,7 @@
-export type AssetCategory = "Ações" | "FIIs" | "ETFs" | "Cripto" | "REITS" | "BDRs";
+import type { Asset, AssetCategory } from "./asset-types";
+import type { CategoryTargets } from "./wallet-types";
 
-export interface Asset {
-  id: string;
-  icon: string;
-  ticker: string;
-  price: number;
-  quantity: number;
-  averagePrice: number;
-  idealQuantity: number;
-  category: AssetCategory;
-  note: number;
-}
-
-export interface CategoryTargets {
-  Ações: number;
-  FIIs: number;
-  ETFs: number;
-  Cripto: number;
-  REITS: number;
-  BDRs: number;
-}
+export type { Asset, AssetCategory, CategoryTargets };
 
 export interface CategoryGroup {
   category: AssetCategory;
@@ -30,5 +12,3 @@ export interface CategoryGroup {
   walletPercent: number;
   targetPercent: number;
 }
-
-export type WalletType = "previdenciaria" | "swingtrade";

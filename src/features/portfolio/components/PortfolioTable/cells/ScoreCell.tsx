@@ -1,19 +1,19 @@
 import { memo } from "react";
 import { useEditableField } from "../../../hooks/useEditableField";
-import { button, textElement } from "@/styles";
+import { buttonType, textElement } from "@/styles";
 import { cn } from "@/lib/cn";
 
 interface ScoreCellProps {
-  note: number;
+  score: number;
   onChange: (n: number) => void;
 }
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-const ScoreCell = ({ note, onChange }: ScoreCellProps) => {
+const ScoreCell = ({ score, onChange }: ScoreCellProps) => {
   const { editing, draft, inputRef, startEditing, setDraft, commit, handleKeyDown } =
     useEditableField<number>({
-      value: note,
+      value: score,
       onCommit: onChange,
 
       parseDraft: (raw) => {
@@ -40,7 +40,7 @@ const ScoreCell = ({ note, onChange }: ScoreCellProps) => {
         }}
         onBlur={commit}
         onKeyDown={handleKeyDown}
-        className={cn(button({ buttonSize: "box" }), "w-10")}
+        className={cn(buttonType({ boxSize: "lg" }), "w-10")}
       />
     );
   }
@@ -49,10 +49,10 @@ const ScoreCell = ({ note, onChange }: ScoreCellProps) => {
     <button
       type="button"
       onClick={startEditing}
-      className={cn(button({ buttonSize: "box" }), "bg-black")}
+      className={cn(buttonType({ boxSize: "lg" }), "bg-black")}
     >
       <span className={cn(textElement({ textColor: "white" }))}>
-        {String(note).padStart(2, "0")}
+        {String(score).padStart(2, "0")}
       </span>
     </button>
   );

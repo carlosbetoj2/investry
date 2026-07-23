@@ -1,14 +1,11 @@
 import { useCallback } from "react";
-import { useWallet } from "../../context/WalletContext";
+import { useWallet } from "../../hooks/useWallet";
 import { usePortfolioMetrics } from "../../hooks/usePortfolioMetrics";
 import PortfolioDrawer from "../PortfolioDrawer";
-import { portfolioTableStyles } from "./styles";
+import { cn } from "@/lib/cn";
+import { layout } from "@/styles";
 
-type PortfolioTableProps = {
-  density?: "compact" | "normal" | "spacious";
-};
-
-const PortfolioTable = ({ density }: PortfolioTableProps) => {
+const PortfolioTable = () => {
   const { expandedCategory, setExpandedCategory } = useWallet();
   const { groups, total } = usePortfolioMetrics();
 
@@ -18,7 +15,7 @@ const PortfolioTable = ({ density }: PortfolioTableProps) => {
   );
 
   return (
-    <div className={portfolioTableStyles({ density })}>
+    <div className={cn(layout({ direction: "col", gap: "md" }))}>
       {groups.map((g) => (
         <PortfolioDrawer
           key={g.category}

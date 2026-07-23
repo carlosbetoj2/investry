@@ -1,6 +1,6 @@
 import { FiEdit3 } from "react-icons/fi";
-import { cn } from "@/lib/utils";
-import { button, iconStyle, input } from "@/styles";
+import { cn } from "@/lib/cn";
+import { buttonType, iconStyle, inputType } from "@/styles";
 import { brl } from "@/shared/utils/format";
 import { useEditableField } from "../../../hooks/useEditableField";
 
@@ -35,7 +35,10 @@ const AveragePriceCell = ({ value, onCommit }: AveragePriceCellProps) => {
           onChange={(e) => setDraft(e.target.value)}
           onBlur={commit}
           onKeyDown={handleKeyDown}
-          className={cn(input({ textColor: "slate", boxSize: "primaryPill" }), "pl-7 w-23")}
+          className={cn(
+            inputType({ textColor: "blackSlate", boxSize: "primaryPill" }),
+            "pl-7 w-23",
+          )}
         />
       </div>
     );
@@ -45,10 +48,10 @@ const AveragePriceCell = ({ value, onCommit }: AveragePriceCellProps) => {
     <button
       type="button"
       onClick={startEditing}
-      className={cn(button({ buttonType: "secondaryGhost", boxSize: "primaryPill" }))}
+      className={cn(buttonType({ ghostType: "secondaryGhost", boxSize: "primaryPill" }))}
     >
       <span>{brl(value)}</span>
-      <FiEdit3 className={iconStyle({ iconSize: "xl", iconColor: "primaryColor" })} />
+      <FiEdit3 className={iconStyle({ width: "xl", iconColor: "primaryColor" })} />
     </button>
   );
 };

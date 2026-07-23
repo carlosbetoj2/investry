@@ -1,9 +1,9 @@
 import { useState } from "react";
 import SectionCard from "@/shared/components/cards/SectionCard";
 import PortfolioTable from "@/features/portfolio/components/PortfolioTable/PortfolioTable";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
-import { appearance, layout, navigationTab, textElement } from "@/styles";
+import { layout, navigationTab, textElement } from "@/styles";
 import { tabContentPlaceholderStyles } from "./styles";
 
 const subTabs = ["Carteira", "Rentabilidade", "Composição"] as const;

@@ -7,19 +7,23 @@ export const fontWeight = {
 };
 
 export const textSize = {
+  logo: "text-2xl",
   xs: "text-[13px]",
   sm: "text-sm ",
   md: "text-[15px]",
   lg: "text-lg",
   xl: "text-xl",
-  xxl: "text-2xl",
+  xxl: "text-4xl",
 };
 
 export const textColor = {
   white: "text-white",
   dark: "text-slate-800",
   black: "text-gray-600",
-  slate: "text-slate-500",
+  blackSlate: "text-slate-500",
+  slate: "text-slate-400",
+  lightSlate: "text-slate-200",
+  blueSky: "text-sky-200",
 };
 
 export const gap = {
@@ -27,18 +31,18 @@ export const gap = {
   sm: "gap-2",
   md: "gap-4",
   lg: "gap-8",
-  xl: "gap-38 bg-red-100",
+  xl: "gap-38 bg-red-600",
 };
 
 export const shadow = {
-  small: "shadow-xs",
-  large: "shadow-sm",
+  small: "shadow-sm",
+  extraLarge: "shadow-2xl",
 };
 
 export const spacing = {
-  extraSmall: "tracking-tighter",
-  small: "tracking-tight",
-  medium: "tracking-wide",
-  large: "tracking-wider",
-  extraLarge: "tracking-widest",
+  extraSmall: "tracking-tighter bg-red-500",
+  small: "tracking-wide",
+  medium: "tracking-wider",
+  large: "tracking-[0.24em]",
+  extraLarge: "tracking-[0.3em]",
 };

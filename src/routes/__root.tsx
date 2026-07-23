@@ -7,11 +7,10 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../app.css?url";
 import "@/styles/global.css";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 import {
   pageLayout,
@@ -46,12 +45,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-
-  useEffect(() => {
-    reportLovableError(error, {
-      boundary: "tanstack_root_error_component",
-    });
-  }, [error]);
 
   return (
     <div className={pageLayout({ variant: "error" })}>
@@ -89,8 +82,8 @@ export const Route = createRootRouteWithContext<{
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Investry" },
+      { name: "description", content: "Investry dashboard application" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),

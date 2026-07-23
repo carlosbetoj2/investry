@@ -1,4 +1,8 @@
 // import dollar from "./dollar.svg";
+export { default as Dollar } from "./dollar.svg";
+export { default as Coin } from "./coin.svg";
+export { default as AvailableBalance } from "./available-balance.svg";
+export { default as UpGraph } from "./up-graph.svg";
 // import coin from "./coin.svg";
 // import availableBalance from "./available-balance.svg";
 export { default as B3Icon } from "./b3.svg?react";

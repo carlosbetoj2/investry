@@ -1,11 +1,22 @@
-export const iconSize = {
+export const width = {
   xs: "w-3",
   sm: "w-4",
   md: "w-5",
   lg: "w-6",
   xl: "w-9",
   xxl: "w-12",
-  logo: "md:w-12 w-9",
+  full: "w-full",
+  logo: "w-9 md:w-12",
+};
+
+export const height = {
+  xs: "h-3 bg-red-500",
+  sm: "h-4 bg-red-500",
+  md: "h-5 bg-red-500",
+  lg: "h-6 bg-red-500",
+  xl: "h-9",
+  xxl: "h-12",
+  logo: "h-9 md:w-12 bg-red-500",
 };
 
 export const iconColor = {
@@ -17,18 +28,12 @@ export const boxSize = {
   secondaryPill: "px-4 py-2",
   sm: "px-1 py-1",
   md: "px-2 py-2",
+  lg: "px-3 py-2",
 };
 
-export const buttonType = {
+export const ghostType = {
   primaryGhost: "hover:bg-white/20",
   secondaryGhost: "hover:bg-secondary",
-  outline: "border border-slate-400 hover:bg-white/10",
-};
-
-export const buttonSize = {
-  sm: "px-4 py-2 my-4 bg-red-500",
-  pill: "px-4 py-2 my-4",
-  box: "px-3 py-2 my-4",
 };
 
 export const border = {

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { FiEdit3 } from "react-icons/fi";
-import { cn } from "@/lib/utils";
-import { button, iconStyle, input } from "@/styles";
+import { cn } from "@/lib/cn";
+import { buttonType, iconStyle, inputType } from "@/styles";
 import { useEditableField } from "@/features/portfolio/hooks/useEditableField";
 
 interface EditableCellProps<T> {
@@ -44,7 +44,7 @@ export function EditableCell<T>({
         onChange={(e) => setDraft(e.target.value)}
         onBlur={commit}
         onKeyDown={handleKeyDown}
-        className={cn(input({ textColor: "slate", boxSize: "primaryPill" }), className)}
+        className={cn(inputType({ textColor: "blackSlate", boxSize: "primaryPill" }), className)}
         {...inputProps}
       />
     );
@@ -54,10 +54,10 @@ export function EditableCell<T>({
     <button
       type="button"
       onClick={startEditing}
-      className={cn(button({ buttonType: "secondaryGhost", boxSize: "primaryPill" }), className)}
+      className={cn(buttonType({ ghostType: "secondaryGhost", boxSize: "primaryPill" }), className)}
     >
       <span>{renderValue(value)}</span>
-      <FiEdit3 className={iconStyle({ iconSize: "xl", iconColor: "primaryColor" })} />
+      <FiEdit3 className={iconStyle({ width: "xl", iconColor: "primaryColor" })} />
     </button>
   );
 }

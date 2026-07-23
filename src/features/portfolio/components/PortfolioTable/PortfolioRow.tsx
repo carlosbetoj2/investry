@@ -1,7 +1,7 @@
 import { memo, useCallback } from "react";
 import { ExternalLink, StickyNote, MoreVertical } from "lucide-react";
 import type { Asset } from "../../types/portfolio-types";
-import { useWallet } from "../../context/WalletContext";
+import { useWallet } from "../../hooks/useWallet";
 import { assetValue, deltaQuantity, shouldBuy } from "../../domain/portfolio-calculations";
 
 import TickerCell from "./cells/TickerCell";
@@ -33,8 +33,8 @@ const PortfolioRow = ({ asset, totalPortfolio, idealQuantity }: PortfolioRowProp
     [asset.id, updateAsset],
   );
 
-  const onNote = useCallback(
-    (v: number) => updateAsset(asset.id, { note: v }),
+  const onScore = useCallback(
+    (v: number) => updateAsset(asset.id, { score: v }),
     [asset.id, updateAsset],
   );
 
@@ -52,34 +52,33 @@ const PortfolioRow = ({ asset, totalPortfolio, idealQuantity }: PortfolioRowProp
   return (
     <div
       className={cn(
-        layout({ alignX: "start", alignY: "center" }),
+        layout({ alignX: "start", alignY: "center", display: "grid", grid: "table" }),
         textElement({ textSize: "sm", textColor: "dark", fontWeight: "medium" }),
-        "grid grid-cols-[1.64fr_1.24fr_repeat(9,minmax(0,1fr))]",
         "odd:bg-slate-100/40 even:bg-white",
-        "border-b border-border/50 px-6 hover:bg-gray-100/60 ",
+        "border-b border-border/50 px-5 hover:bg-gray-100/40 ",
       )}
     >
       <div
         className={cn(
           textElement({ textSize: "sm" }),
           layout({ direction: "fixedBox", layer: "up" }),
-          "shadow-[6px_0_18px_-14px_rgba(0,0,0,0.35)] py-5 ",
+          "shadow-[6px_0_18px_-14px_rgba(0,0,0,0.35)] py-5",
         )}
       >
-        <TickerCell ticker={asset.ticker} icon={asset.icon} />
+        <TickerCell ticker={asset.ticker} icon={asset.icon} market={asset.market} />
       </div>
 
       <div>
-        <AveragePriceCell value={asset.averagePrice} onCommit={onPrice} />
+        <AveragePriceCell value={asset.averagePrice ?? 0} onCommit={onPrice} />
       </div>
 
-      <div className={cn(textElement({ textColor: "slate" }))}>{brl(asset.price)}</div>
+      <div className={cn(textElement({ textColor: "blackSlate" }))}>{brl(asset.price)}</div>
 
       <div>
         <QuantityCell quantity={asset.quantity} delta={delta} onChange={onQty} />
       </div>
 
-      <div className={cn(textElement({ textColor: "slate" }))}>{idealQuantity}</div>
+      <div className={cn(textElement({ textColor: "blackSlate" }))}>{idealQuantity}</div>
 
       <div>
         <span
@@ -92,14 +91,14 @@ const PortfolioRow = ({ asset, totalPortfolio, idealQuantity }: PortfolioRowProp
         </span>
       </div>
 
-      <div className={cn(textElement({ textColor: "slate" }))}>{pct(walletPct)}</div>
+      <div className={cn(textElement({ textColor: "blackSlate" }))}>{pct(walletPct)}</div>
 
       <div>{pct(idealPct)}</div>
 
-      <div className={cn(textElement({ textColor: "slate" }))}>{brl(value)}</div>
+      <div className={cn(textElement({ textColor: "blackSlate" }))}>{brl(value)}</div>
 
       <div>
-        <ScoreCell note={asset.note} onChange={onNote} />
+        <ScoreCell score={asset.score ?? 0} onChange={onScore} />
       </div>
 
       <div className="flex items-center gap-2">
